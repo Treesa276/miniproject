@@ -1,7 +1,11 @@
+from glob import glob
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from store.models.customer import Customer
 from django.views import View
+from random import randint
+
+CustomerPostData = ""
 
 
 class Signup (View):
@@ -9,7 +13,12 @@ class Signup (View):
         return render (request, 'signup.html')
 
     def post(self, request):
-        postData = request.POST
+        global CustomerPostData
+        CustomerPostData = request.POST
+
+        # return redirect('mailauth')
+        postData = CustomerPostData
+
         first_name = postData.get ('firstname')
         last_name = postData.get ('lastname')
         phone = postData.get ('phone')
@@ -66,3 +75,9 @@ class Signup (View):
         # saving
 
         return error_message
+ 
+
+def mailValidation(request, genOTP=0, mailOTP=0):
+    genOTP = randint(100001, 999999)
+    print(genOTP)
+    return render(request, 'mail_validation.html')

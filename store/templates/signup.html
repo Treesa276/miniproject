@@ -18,7 +18,7 @@
             <hr>
             </div>
             <h3 class="alert alert-success rounded-pill" style="text-align:center">Create an Account</h3>
-            <form action="/signup" method="POST">
+            <form action="/signup" method="POST" id="auth_form">
                 
                 {% csrf_token %}
 
@@ -69,18 +69,20 @@
                     id=""
                      class="form-control form-control-sm">
                 </div>
-
-                <!--Checkme button-->
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label d-grid gap-2" for="exampleCheck1">Check me out</label>
-                </div>
                 <hr>
-                <button type="submit" class="btn btn-sm btn-success col-lg-12">Create an account</button>
+                <!-- <button type="button" class="btn btn-sm btn-success col-lg-12" onclick="emailOTP();">Proceed</button> -->
+                <button type="submit" id="subBtn" class="btn btn-sm btn-success col-lg-12">Create an account</button>
 
             </form>
         </div>
     </div>
 </div>
+
+<!-- <script>
+    function emailOTP(){
+        form_id = document.getElementById('auth_form');
+        form_id.style.display = 'none';
+    }
+</script> -->
 
 {% endblock %}

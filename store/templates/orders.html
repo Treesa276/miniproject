@@ -19,6 +19,7 @@
                     <th>Quantity</th>
                     <th>Total</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,10 +34,30 @@
                     <td>{{order.quantity}}</td>
                     <td>{{order.quantity|multiply:order.price|currency}}</td>
                     {% if order.status %}
-                    <td><small class="badge badge-success">Completed</small></td>
+                        {% if order.action == 1 %}
+                            <td><small class="badge badge-success">Completed</small></td>
+                        {% else %}
+                            <td><small class="badge badge-info">Returned</small></td>
+                        {% endif %}
                     {%else%}
-                    <td><small class="badge badge-warning">Pending</small></td>
+                        {% if order.action == 1 %}
+                            <td><small class="badge badge-warning">Pending</small></td>
+                        {% else %}
+                            <td><small class="badge badge-info">Returned</small></td>
+                        {% endif %}
                     {% endif %}
+                    <td>
+                    {% if order.action == 1 %}
+                    <form action="return_item" method="GET">
+                        <input type="hidden" value="{{ order.id }}" name="order_id">
+                        <input type="submit" class="btn-sm btn-info" value="Return Item" />
+                    </form>
+                    {% else %}
+
+                        <!-- <button type="button" class="btn-sm btn-info">Returned</button> -->
+
+                    {% endif %}
+                    </td>
                 </tr>
 
                 {% endfor %}

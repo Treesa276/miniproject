@@ -15,6 +15,7 @@ class Order(models.Model):
     phone = models.CharField (max_length=50, default='', blank=True)
     date = models.DateField (default=datetime.datetime.today)
     status = models.BooleanField (default=False)
+    action = models.IntegerField(default=1)
 
     def placeOrder(self):
         self.save()
@@ -22,4 +23,8 @@ class Order(models.Model):
     @staticmethod
     def get_orders_by_customer(customer_id):
         return Order.objects.filter(customer=customer_id).order_by('-date')
+
+    # @staticmethod
+    # def get_order_by_id(order_id):
+        # return Order.object.get(id=order_id)
 
